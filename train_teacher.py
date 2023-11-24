@@ -83,7 +83,7 @@ def train_model(iter,cls):
         print("Epoch:", epoch + 1, "accuracy:", accu1)
 
         if accu1 > accu_best:
-            torch.save(model.state_dict(), os.path.join(dir, "teacher_s_" + str(iter) + ".pth"))
+            torch.save(model.state_dict(), os.path.join(dir, "teacher.pth"))
             accu_best = accu1
         #
         # if (accu_best > 0.87):
@@ -95,7 +95,7 @@ if __name__ == "__main__":
     if os.path.exists(dir) == 0:
         os.mkdir(dir)
 
-    for iter in range(3):
+    for iter in range(1):
         accus = []
         cls = 'vgg'
         print("Beigin training model:",iter,"Model:",cls)

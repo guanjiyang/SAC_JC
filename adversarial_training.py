@@ -14,7 +14,7 @@ import h5py
 import time
 from torch.nn.parallel import DataParallel
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,5,6"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,2,5,6"
 dir = "adv_train"
 BATCH_SIZE = 128
 
@@ -130,8 +130,8 @@ if __name__ == "__main__":
 
     models = []
     accus = []
-    for i in range(1):
-        iters = i+3
+    for i in range(20):
+        iters = i
         globals()['student' + str(iters)] = load_model(iters, "model_extract")
         models.append(globals()['student' + str(iters)])
 
@@ -142,5 +142,5 @@ if __name__ == "__main__":
 
     for i in range(len(models)):
         accu = adv_train(models[i], teacher, train_loader, test_loader, iter=3)
-        print("Adversarial training model:",str(4))
+        print("Adversarial training model:",str(i))
         accus.append(accu)

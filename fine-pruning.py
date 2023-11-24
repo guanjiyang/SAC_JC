@@ -19,7 +19,7 @@ import torch.utils.data as Data
 from copy import deepcopy
 
 from torch.nn.parallel import DataParallel
-os.environ["CUDA_VISIBLE_DEVICES"] = "6,7"
+os.environ["CUDA_VISIBLE_DEVICES"] = "4,5"
 
 
 

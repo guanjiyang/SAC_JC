@@ -8,7 +8,7 @@ import torch.optim as optim
 from math import isnan
 from torch import nn
 import torch.nn.functional as F
-os.environ["CUDA_VISIBLE_DEVICES"]='1'
+os.environ["CUDA_VISIBLE_DEVICES"]='0'
 BATCH_SIZE= 32
 EPOCH = 100
 dir ='model_extract'
@@ -118,8 +118,8 @@ if __name__ == "__main__":
 
     accus = []
 
-    for iter in range(1):
-        iters = iter+3
+    for iter in range(20):
+        iters = iter
 
         if iters < 5:
             cls = 'vgg'

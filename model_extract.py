@@ -128,8 +128,8 @@ if __name__ == "__main__":
 
     accus = []
 
-    for iter in range(1):
-        iters = iter+3
+    for iter in range(20):
+        iters = iter
 
         if iters < 5:
             cls = 'vgg'

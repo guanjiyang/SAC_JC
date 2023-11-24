@@ -11,7 +11,7 @@ from math import isnan
 import cv2
 import time
 # from torch.nn.parallel import DataParallel
-os.environ['CUDA_VISIBLE_DEVICES']='1'
+os.environ['CUDA_VISIBLE_DEVICES']='0'
 
 
 BATCH_SIZE = 64
@@ -122,8 +122,8 @@ if __name__ == "__main__":
 
     accus = []
 
-    for iter in range(1):
-        iters = iter+3
+    for iter in range(20):
+        iters = iter
 
         if iters < 5:
             cls = 'vgg'
