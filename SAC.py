@@ -11,7 +11,7 @@ import torch.nn.functional as F
 from utils import load_model,FeatureHook
 from sklearn.metrics import roc_curve,auc
 
-os.environ["CUDA_VISIBLE_DEVICES"] = '6,7'
+os.environ["CUDA_VISIBLE_DEVICES"] = '0,1'
 
 BATCH_SIZE = 16
 
@@ -90,8 +90,8 @@ def cal_cor(model,dataloader):
         outputs.append(output.detach())
 
     output = torch.concat(outputs,0)
-    # cor_mat = correlation(output,output)
-    cor_mat = correlation_dist(output)
+    cor_mat = correlation(output,output)
+    # cor_mat = correlation_dist(output)
 
 
 

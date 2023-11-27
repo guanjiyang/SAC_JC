@@ -139,14 +139,13 @@ def load_model(num, mode):
         in_feature = model.classifier[-1].in_features
         model.classifier[-1] = torch.nn.Linear(in_feature, 7)
 
-        if num >= 10:
-            model.load_state_dict(torch.load('finetune/finetune'+str(num)+'.pth'))
 
-        elif num <10:
-            model.load_state_dict(torch.load('finetune2/finetune' + str(num) + '.pth'))
+        model.load_state_dict(torch.load('finetune/finetune'+str(num)+'.pth'))
+
+
 
     elif mode == "fine-pruning":
-        model = torch.load("prune2/prune_model_" + str(num)+".pth")
+        model = torch.load("prune/prune_model_" + str(num)+".pth")
 
 
     elif mode == 'CEM_extract':
