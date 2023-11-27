@@ -16,41 +16,8 @@ os.environ["CUDA_VISIBLE_DEVICES"] = '0,1'
 BATCH_SIZE = 16
 
 
-def cal_cor_onehot(model,dataloader):
-    model.eval()
-    model = model.cuda()
-    outputs = []
-    for i,(x,y) in enumerate(dataloader):
-        x, y = x.cuda(), y.cuda()
-        output = model(x)
-        output = output_to_label(output)
-        outputs.append(output.cpu().detach())
 
-    output = torch.cat(outputs,dim=0)
-    cor_mat = correlation(output,output)
-    # cor_mat = correlation_dist(output)
-    model = model.cpu()
-    return cor_mat
 
-def output_to_label(output):
-    shape = output.shape
-    pred = torch.argmax(output,dim=1)
-    preds = torch.zeros(shape)
-    for i in range(shape[0]):
-        preds[i,pred[i]]=1
-    return preds
-
-def output_to_label_soft(output,soft_factor):
-    shape = output.shape
-    pred = torch.argmax(output,dim=1)
-    preds = soft_factor * torch.ones(shape)
-
-    for i in range(shape[0]):
-        preds[i,pred[i]]=1
-
-    preds = torch.softmax(preds,dim=-1)
-
-    return preds
 
 def correlation(m,n):
     m = F.normalize(m,dim=-1)
@@ -248,7 +215,7 @@ if __name__ == '__main__':
         models.append(globals()['fine-tune' + str(i)])
 
 
-    for i in range(10):
+    for i in range(5):
         globals()['fine-pruning' + str(i)] = load_model(i, "fine-pruning")
         models.append(globals()['fine-pruning' + str(i)])
 
