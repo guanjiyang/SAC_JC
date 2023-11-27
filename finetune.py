@@ -19,7 +19,7 @@ os.environ["CUDA_VISIBLE_DEVICES"]="7"
 EPOCH = 30
 BATCH_SIZE = 32
 
-dir = "finetune2"
+dir = "finetune"
 
 
 
@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
     accus = []
 
-    for iter in range(10):
+    for iter in range(20):
         iters = iter
 
         if iters < 10:
