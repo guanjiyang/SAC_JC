@@ -65,9 +65,9 @@ def augment_data(iter,augment_name):
     root = 'data/data_augmented/'+augment_name+'_augment_s={}_f={}.h5'.format(Sever,flip_flag)
 
 
-    file2 = h5py.File(root, 'w')
-    file2.create_dataset("/data", data=imgs)
-    file2.create_dataset("/label", data=labels)
+    # file2 = h5py.File(root, 'w')
+    # file2.create_dataset("/data", data=imgs)
+    # file2.create_dataset("/label", data=labels)
 
 if __name__ == '__main__':
 
