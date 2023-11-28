@@ -69,7 +69,7 @@ class dataset_test(Dataset):
 
         label = torch.tensor(self.labels[item])
         image = np.array(self.images[item, :, :, :]*255,dtype='uint8')
-        # image = torch.tensor(image)
+        image = torch.tensor(image)
         image = transform_test(image)
 
 

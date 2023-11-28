@@ -13,7 +13,7 @@ from KDEF_dataset import dataset_train,dataset_test
 from utils import load_model
 # from torch.nn.parallel import DataParallel
 
-os.environ["CUDA_VISIBLE_DEVICES"]="7"
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 
 EPOCH = 30
@@ -39,20 +39,6 @@ def finetune_model(teacher, train_loader,test_loader,cls,iter):
 
     for epoch in range(EPOCH):
 
-        # teacher.train()
-        # for i, (x, y) in enumerate(train_loader):
-        #     x = x.type(torch.FloatTensor)
-        #     y = y.long()
-        #     b_x, b_y = x.cuda(), y.cuda()
-        #     teacher_output = teacher(b_x)
-        #     loss = loss_func(teacher_output, b_y)
-        #     optimizer.zero_grad()
-        #     loss.backward()
-        #     torch.nn.utils.clip_grad_norm_(teacher.parameters(), 5)
-        #     optimizer.step()
-        #
-        #     if (i % 20 == 0):
-        #         print("Epoch:", epoch + 1, "iteration:", i, "loss:", loss.data.item())
 
         teacher.eval()
         num = 0
@@ -71,10 +57,10 @@ def finetune_model(teacher, train_loader,test_loader,cls,iter):
 
         print("Epoch:", epoch + 1, "accuracy:", accu1)
 
-        # if accu1 > accu_best:
-        #     torch.save(teacher.state_dict(), os.path.join(dir, "finetune" + str(iter) + ".pth"))
-        #     accu_best = accu1
-        #     epoch_best = epoch
+        if accu1 > accu_best:
+            torch.save(teacher.state_dict(), os.path.join(dir, "finetune" + str(iter) + ".pth"))
+            accu_best = accu1
+            epoch_best = epoch
 
     return accu_best,epoch_best
 
@@ -98,11 +84,6 @@ if __name__ == "__main__":
             cls = 'all'
         elif 10 <= iters < 20:
             cls = 'last'
-
-        # teacher = torchvision.models.vgg16_bn(pretrained=False)
-        # in_feature = teacher.classifier[-1].in_features
-        # teacher.classifier[-1] = torch.nn.Linear(in_feature, 7)
-        # teacher.load_state_dict(torch.load("teacher/teacher.pth"))
 
         teacher = load_model(0,"teacher")
 

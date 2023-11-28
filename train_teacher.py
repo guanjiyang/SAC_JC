@@ -82,12 +82,10 @@ def train_model(iter,cls):
 
         print("Epoch:", epoch + 1, "accuracy:", accu1)
 
-        if accu1 > accu_best:
-            torch.save(model.state_dict(), os.path.join(dir, "teacher.pth"))
-            accu_best = accu1
-        #
-        # if (accu_best > 0.87):
-        #     break
+        # if accu1 > accu_best:
+        #     torch.save(model.state_dict(), os.path.join(dir, "teacher.pth"))
+        #     accu_best = accu1
+
 
     return accu_best
 

@@ -51,9 +51,8 @@ def augment_data(iter,augment_name):
     print(imgs.shape, labels.shape)
 
     if flip_flag == 1:
-        imgs = imgs.transpose(1,3)
-    elif flip_flag == 0:
-        imgs = imgs.permute(0, 2, 3, 1)
+        imgs = imgs.transpose(2,3)
+
 
     print(imgs.shape, torch.max(imgs), torch.min(imgs))
 
@@ -61,13 +60,12 @@ def augment_data(iter,augment_name):
     labels = np.array(labels)
 
 
-
     root = 'data/data_augmented/'+augment_name+'_augment_s={}_f={}.h5'.format(Sever,flip_flag)
 
 
-    # file2 = h5py.File(root, 'w')
-    # file2.create_dataset("/data", data=imgs)
-    # file2.create_dataset("/label", data=labels)
+    file1 = h5py.File(root, 'w')
+    file1.create_dataset("/data", data=imgs)
+    file1.create_dataset("/label", data=labels)
 
 if __name__ == '__main__':
 
@@ -82,7 +80,7 @@ if __name__ == '__main__':
     for augment_name in ['jpeg_compression']:
 
         print(augment_name)
-        for iter in range(10):
+        for iter in range(2):
 
             augment_data(iter,augment_name)
 
