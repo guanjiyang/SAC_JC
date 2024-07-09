@@ -39,6 +39,21 @@ def finetune_model(teacher, train_loader,test_loader,cls,iter):
 
     for epoch in range(EPOCH):
 
+        teacher.train()
+        for i, (x, y) in enumerate(train_loader):
+            x = x.type(torch.FloatTensor)
+            y = y.long()
+            b_x, b_y = x.cuda(), y.cuda()
+            teacher_output = teacher(b_x)
+            loss = loss_func(teacher_output, b_y)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            if (i % 20 == 0):
+                print("Epoch:", epoch + 1, "iteration:", i, "loss:", loss.data.item())
+
+
 
         teacher.eval()
         num = 0
